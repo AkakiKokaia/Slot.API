@@ -3,3 +3,28 @@
 2024-07-02 03:06:40.2206 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
 2024-07-02 03:06:40.2206 Info Configuration initialized.
 2024-07-02 03:06:40.5224 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:49:57.7689 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-07-02 12:49:57.7689 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-07-02 12:49:57.7857 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:49:57.7857 Info Configuration initialized.
+2024-07-02 12:49:58.3115 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:51:37.8887 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-07-02 12:51:37.9008 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-07-02 12:51:37.9177 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:51:37.9248 Info Configuration initialized.
+2024-07-02 12:51:38.6268 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:52:45.7208 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-07-02 12:52:45.7373 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-07-02 12:52:45.7540 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:52:45.7540 Info Configuration initialized.
+2024-07-02 12:52:46.5204 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:53:42.1272 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-07-02 12:53:42.1272 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-07-02 12:53:42.1427 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:53:42.1427 Info Configuration initialized.
+2024-07-02 12:53:42.9335 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:57:00.0873 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-07-02 12:57:00.0953 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-07-02 12:57:00.0953 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config
+2024-07-02 12:57:00.0953 Info Configuration initialized.
+2024-07-02 12:57:00.3877 Info Validating config: TargetNames=allfile, ConfigItems=16, FilePath=C:\Users\kokai\OneDrive\Desktop\SlotApi\Project.Identity-master\Project.API\bin\Debug\net8.0\nlog.config

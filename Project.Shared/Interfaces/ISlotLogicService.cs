@@ -2,6 +2,8 @@
 
 public interface ISlotLogicService
 {
-    string GenerateSlotResult();
-    decimal CalculateWinAmount(string result);
+    decimal CalculateWinAmount(string[,] result, decimal betAmount);
+    decimal GetMultiplier(string symbol, int count);
+    string[,] GenerateSlotResult();
+    string ConvertResultToString(string[,] result);
 }

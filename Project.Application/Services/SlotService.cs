@@ -31,7 +31,7 @@ public class SlotService : ISlotService
         user.Balance -= spinCost;
 
         var result = _slotLogic.GenerateSlotResult();
-        var winAmount = _slotLogic.CalculateWinAmount(result);
+        var winAmount = _slotLogic.CalculateWinAmount(result, spinCost);
 
         TransactionType transactionType;
         decimal transactionAmount;
@@ -42,18 +42,14 @@ public class SlotService : ISlotService
             transactionAmount = winAmount;
             user.Balance += winAmount;
         }
-        else if (winAmount == 0)
-        {
-            transactionType = TransactionType.Draw;
-            transactionAmount = 0;
-        }
         else
         {
             transactionType = TransactionType.Lost;
-            transactionAmount = spinCost;
+            transactionAmount = -spinCost;
         }
 
-        var transaction = new Transaction(userId, transactionAmount, transactionType, result);
+        var resultString = _slotLogic.ConvertResultToString(result);
+        var transaction = new Transaction(userId, transactionAmount, transactionType, resultString);
         await _transactionRepository.AddAsync(transaction);
         await _userManager.UpdateAsync(user);
 

@@ -27,23 +27,23 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, Transaction>
 
     public async Task<Transaction> Handle(SpinCommand request, CancellationToken cancellationToken)
     {
-        var userIdClaim = _context.User.Claims.First(c => c.Type == "UserID").Value;
+        string userIdClaim = _context.User.Claims.First(c => c.Type == "UserID").Value;
 
-        if (userIdClaim == null || !Guid.TryParse(userIdClaim, out var userId))
+        if (userIdClaim == default || !Guid.TryParse(userIdClaim, out var userId))
         {
             throw new Exception("User not found or invalid user ID in JWT token.");
         }
 
         var user = await _userManager.FindByIdAsync(userId.ToString()) ?? throw new Exception("User not found");
 
-        const decimal spinCost = 1.0m;
+        var betAmount = request.BetAmount;
 
-        if (user.Balance < spinCost) throw new Exception("Insufficient balance");
+        if (user.Balance < betAmount) throw new Exception("Insufficient balance");
 
-        user.Balance -= spinCost;
+        user.Balance -= betAmount;
 
         var result = _slotLogicService.GenerateSlotResult();
-        var winAmount = _slotLogicService.CalculateWinAmount(result);
+        var winAmount = _slotLogicService.CalculateWinAmount(result, betAmount);
 
         TransactionType transactionType;
         decimal transactionAmount;
@@ -54,18 +54,14 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, Transaction>
             transactionAmount = winAmount;
             user.Balance += winAmount;
         }
-        else if (winAmount == spinCost)
-        {
-            transactionType = TransactionType.Draw;
-            transactionAmount = 0;
-        }
         else
         {
             transactionType = TransactionType.Lost;
-            transactionAmount = -spinCost;
+            transactionAmount = -betAmount;
         }
 
-        var transaction = new Transaction(userId, transactionAmount, transactionType, result);
+        var resultString = _slotLogicService.ConvertResultToString(result);
+        var transaction = new Transaction(userId, transactionAmount, transactionType, resultString);
         await _transactionRepository.AddAsync(transaction);
         await _transactionRepository.SaveChangesAsync(cancellationToken);
 
