@@ -8,6 +8,7 @@ using Project.Application.Features.Profile.DeleteProfile;
 using Project.Application.Features.Profile.GetProfile;
 using Project.Application.Features.Profile.UpdateProfile;
 using Project.Application.Features.Slot.Command;
+using Project.Application.Features.Slot.Query.DataModels;
 using Project.Domain.Aggregates.Transactions;
 using Project.Shared.Configuration.Wrappers;
 
@@ -45,6 +46,6 @@ public class ProfileController : BaseApiController
 
 
     [HttpPost(nameof(Slot))]
-    [ProducesResponseType(typeof(Response<Transaction>), 200)]
-    public async Task Slot(SpinCommand request) => await Mediator.Send(request);
+    [ProducesResponseType(typeof(Response<SpinResultDTO>), 200)]
+    public async Task<SpinResultDTO> Slot(SpinCommand request) => await Mediator.Send(request);
 }

@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Project.Application.Features.Slot.Query.DataModels;
 using Project.Domain.Aggregates.Transactions;
 using Project.Domain.Aggregates.Transactions.Enum;
 using Project.Domain.Aggregates.Transactions.Interfaces;
 using Project.Domain.Aggregates.Users.Entity;
 using Project.Shared.Interfaces;
-using System.Security.Claims;
 
 namespace Project.Application.Features.Slot.Command;
 
-public class SpinCommandHandler : IRequestHandler<SpinCommand, Transaction>
+public class SpinCommandHandler : IRequestHandler<SpinCommand, SpinResultDTO>
 {
     private readonly UserManager<User> _userManager;
     private readonly ITransactionRepository _transactionRepository;
@@ -25,7 +25,7 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, Transaction>
         _context = contextAccessor.HttpContext;
     }
 
-    public async Task<Transaction> Handle(SpinCommand request, CancellationToken cancellationToken)
+    public async Task<SpinResultDTO> Handle(SpinCommand request, CancellationToken cancellationToken)
     {
         string userIdClaim = _context.User.Claims.First(c => c.Type == "UserID").Value;
 
@@ -71,6 +71,13 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, Transaction>
             throw new Exception("Failed to update user balance");
         }
 
-        return transaction;
+        return new SpinResultDTO
+        {
+            CurrentBalance = user.Balance,
+            WinAmount = winAmount,
+            BetAmount = betAmount,
+            SlotResult = resultString,
+            TransactionType = transactionType
+        };
     }
 }
