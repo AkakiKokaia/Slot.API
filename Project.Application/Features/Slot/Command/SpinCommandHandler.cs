@@ -84,8 +84,6 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, SpinResultDTO>
             TransactionType = transactionType
         };
 
-        await _hubContext.Clients.User(userId.ToString()).SendAsync("ReceiveSpinResult", spinResult);
-
         return spinResult;
     }
 }
