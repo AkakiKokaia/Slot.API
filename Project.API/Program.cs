@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using NLog.Web;
 using Project.Application.Configuration;
 using Project.Application.Configuration.Middlewares;
+using Project.Application.Hubs;
 using Project.Infrastructure;
 using Project.Infrastructure.Db;
 
@@ -29,6 +31,8 @@ public class Program
 
             builder.Services.AddControllers();
 
+            builder.Services.AddSignalR();
+
             builder.Services.AddApiLayer(builder.Configuration, builder.Environment)
                             .AddApplicationLayer()
                             .AddInfrastructureLayer(builder.Configuration)
@@ -53,14 +57,18 @@ public class Program
                 }
             }
 
-            app.MapControllers();
-
             app.UseHttpsRedirection()
                .UseMiddleware<ErrorHandlerMiddleware>()
                .UseRouting()
                .UseAuthentication()
                .UseAuthorization()
                .UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<SlotHub>("/slot-hub");
+            });
 
             await app.RunAsync();
         }

@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Project.Application.Features.Slot.Query.DataModels;
+using Project.Application.Hubs;
 using Project.Domain.Aggregates.Transactions;
 using Project.Domain.Aggregates.Transactions.Enum;
 using Project.Domain.Aggregates.Transactions.Interfaces;
@@ -16,13 +18,15 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, SpinResultDTO>
     private readonly ITransactionRepository _transactionRepository;
     private readonly ISlotLogicService _slotLogicService;
     private readonly HttpContext _context;
+    private readonly IHubContext<SlotHub> _hubContext;
 
-    public SpinCommandHandler(UserManager<User> userManager, ITransactionRepository transactionRepository, ISlotLogicService slotLogicService, IHttpContextAccessor contextAccessor)
+    public SpinCommandHandler(UserManager<User> userManager, ITransactionRepository transactionRepository, ISlotLogicService slotLogicService, IHttpContextAccessor contextAccessor, IHubContext<SlotHub> hubContext)
     {
         _userManager = userManager;
         _transactionRepository = transactionRepository;
         _slotLogicService = slotLogicService;
         _context = contextAccessor.HttpContext;
+        _hubContext = hubContext;
     }
 
     public async Task<SpinResultDTO> Handle(SpinCommand request, CancellationToken cancellationToken)
@@ -71,7 +75,7 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, SpinResultDTO>
             throw new Exception("Failed to update user balance");
         }
 
-        return new SpinResultDTO
+        var spinResult = new SpinResultDTO
         {
             CurrentBalance = user.Balance,
             WinAmount = winAmount,
@@ -79,5 +83,9 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, SpinResultDTO>
             SlotResult = resultString,
             TransactionType = transactionType
         };
+
+        await _hubContext.Clients.User(userId.ToString()).SendAsync("ReceiveSpinResult", spinResult);
+
+        return spinResult;
     }
 }
