@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text;
 using Project.Application.Features.Slot.Query.DataModels;
 
-namespace Project.Test;
+namespace Project.TestConsole;
 
 internal class Program
 {
