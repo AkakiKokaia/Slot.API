@@ -9,7 +9,7 @@ internal class Program
 {
     private static async Task<string> LoginAndGetTokenAsync(string username, string password)
     {
-        var loginUrl = "https://localhost:7145/api/v1/Account/SignIn";
+        var loginUrl = "https://localhost:44344/api/v1/Account/SignIn";
 
         var httpClient = new HttpClient();
 
@@ -56,7 +56,7 @@ internal class Program
         }
 
         var connection = new HubConnectionBuilder()
-            .WithUrl("https://localhost:7145/slot-hub", options =>
+            .WithUrl("https://localhost:44344/slot-hub", options =>
             {
                 options.AccessTokenProvider = () => Task.FromResult(token);
             })
