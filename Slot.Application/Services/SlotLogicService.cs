@@ -6,6 +6,9 @@ namespace Slot.Application.Services;
 public class SlotLogicService : ISlotLogicService
 {
     private static readonly Random Random = new Random();
+
+    private static int _spinCounter = 0;
+    private static readonly object _counterLock = new object();
     public class SymbolData
     {
         public SymbolData(int id, string name, decimal[] multiplier)
@@ -51,6 +54,15 @@ public class SlotLogicService : ISlotLogicService
             }
         }
         return result;
+    }
+
+    public bool IsBonusWin()
+    {
+        lock (_counterLock)
+        {
+            _spinCounter++;
+            return _spinCounter % 5 == 0;
+        }
     }
 
     public decimal CalculateWinAmount(string[,] result, decimal betAmount)

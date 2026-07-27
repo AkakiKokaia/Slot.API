@@ -7,4 +7,5 @@ public enum TransactionType
     Draw = 2,
     Lost = 3,
     Won = 4,
+    PrizeWin = 5
 }

@@ -48,11 +48,22 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, SpinResultDTO>
 
         var result = _slotLogicService.GenerateSlotResult();
         var winAmount = _slotLogicService.CalculateWinAmount(result, betAmount);
+        var isBonusWin = _slotLogicService.IsBonusWin();
 
         TransactionType transactionType;
         decimal transactionAmount;
+        string bonusWin = null;
+        string bonusWinImage = null;
 
-        if (winAmount > 0)
+        if (isBonusWin)
+        {
+            transactionType = TransactionType.PrizeWin;
+            bonusWin = "IPhone";
+            bonusWinImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzJyXCBn0WenmYIMe57zPTLvnY0fXZtsB2rwPo9mpwbVwHNm1h4CU3iXRK&s=10";
+            transactionAmount = winAmount;
+            user.Balance += winAmount;
+        }
+        else if (winAmount > 0)
         {
             transactionType = TransactionType.Won;
             transactionAmount = winAmount;
@@ -81,7 +92,9 @@ public class SpinCommandHandler : IRequestHandler<SpinCommand, SpinResultDTO>
             WinAmount = winAmount,
             BetAmount = betAmount,
             SlotResult = resultString,
-            TransactionType = transactionType
+            TransactionType = transactionType,
+            BonusWin = bonusWin,
+            BonusWinImage = bonusWinImage
         };
 
         return spinResult;

@@ -9,4 +9,6 @@ public class SpinResultDTO
     public decimal BetAmount { get; set; }
     public string SlotResult { get; set; }
     public TransactionType TransactionType { get; set; }
+    public string BonusWin { get; set; }
+    public string BonusWinImage { get; set; }
 }
